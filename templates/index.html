@@ -1,0 +1,435 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PERO YA!</title>
+    <link rel="icon" href='{% static  "img/iconLog.png" %}'>
+
+    <!-- Google Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200,300,700,600' rel='stylesheet'
+        type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,300' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,100' rel='stylesheet' type='text/css'>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href='{% static  "css/bootstrap.min.css" %}'>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href='{% static "css/font-awesome.min.css" %}'>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href='{% static "css/owl.carousel.css" %}'>
+    <link rel="stylesheet" href='{% static "css/style.css" %}'>
+    <link rel="stylesheet" href='{% static "css/responsive.css" %}'>
+
+
+</head>
+
+<body>
+
+    <div class="header-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="user-menu">
+                        <ul>
+                            <li><a href="{% url 'pagPrincipal' %}"><i class="fa fa-user"></i> Mi Cuenta</a></li>
+                            <li><a href=" {% url 'carrito' %} "><i class="fa fa-shopping-cart"></i> Mi Carrito</a></li>
+                            <li><a href=" {% url 'pagVerificar' %} "><i class="fa fa-cc-visa"></i> Pagos</a></li>
+
+                            <!-- Usuario valida -->
+                            {% if user.username %}
+                            <li class="dropdown">
+                                <span style="color: #5ACA76;" class="dropdown-toggle" data-toggle="dropdown"><i
+                                        class=" fa fa-user " data-toggle="dropdown"></i>
+                                    {{user.username | upper }}
+                                    <b class="caret"></b>
+                                </span>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{% url 'logout' %}">Cerrar Sesión</a></li>
+                                    {% if user.username == 'admin' %}
+                                    <li><a href="{% url 'registrarProducto' %}">Registrar Producto</a></li>
+                                    <li><a href="{% url 'listadoProductos' %}">Listado de productos</a></li>
+                                    {% endif%}
+
+                                </ul>
+
+                            </li>
+                            {% else %}
+                            <li><a href="{% url 'login' %}"><i class="fa fa-user"></i> Iniciar Sesion</a></li>
+                            <li><a href="{% url 'registrar' %}"><i class="fa fa-user"></i> Registrarse</a></li>
+                            {% endif%}
+
+
+
+                        </ul>
+                    </div>
+                </div>
+                <!--
+                <div class="col-md-4">
+                    <div class="header-right">
+                        <ul class="list-unstyled list-inline">
+                            <li class="dropdown dropdown-small">
+                                <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span
+                                        class="key">Moneda : </span><span class="value"> USD </span><b
+                                        class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">USD</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="dropdown dropdown-small">
+                                <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span
+                                        class="key">Lenguaje : </span><span class="value"> Español </span><b
+                                        class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Español</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>-->
+            </div>
+        </div>
+    </div> <!-- End header area -->
+
+    <div class="site-branding-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="logo">
+                        <h1><a href=" {% url 'pagPrincipal' %} "><img src='{% static  "img/logoEPD.png" %}'></a></h1>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="shopping-item">
+                        <a href=" {% url 'carrito' %} ">Carrito - <span class="cart-amunt">$ {{total_carrito}}</span> <i
+                                class="fa fa-shopping-cart"></i> <span class="product-count">{{total_items}}</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- End site branding area -->
+
+    <div class="mainmenu-area">
+        <div class="container">
+            <div class="row">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href=" {% url 'pagPrincipal' %} ">Inicio</a></li>
+                        <li><a href=" {% url 'pagServicios' %} ">Categoria</a></li> <!-- Servicios -->
+                        <li><a href=" {% url 'contactos' %} ">Contactos</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div> <!-- End mainmenu area -->
+
+    <div class="slider-area">
+        <!-- Slider -->
+        <div class="block-slider block-slider4">
+            <ul class="" id="bxslider-home4">
+                <li>
+                    <img src='{% static "img/h4-slide10.png" %}' alt="Slide">
+                    <div class="caption-group">
+                        <h2 class="caption title">
+                            TU DELIVERY <span class="primary"> <strong></strong></span>
+                        </h2>
+                        <h2 class="caption title">
+                            <span class="primary"> <strong>ES NUESTRA PRIORIDAD</strong></span>
+                        </h2>
+                    </div>
+                </li>
+                <li><img src='{% static "img/h4-slide11.png" %}' alt="Slide">
+                    <div class="caption-group">
+                        <center>
+                            <h2 class="caption title">
+                                HAGA SU PEDIDO
+                            </h2>
+                            <h2 class="caption title">
+                                <span class="primary">20% <strong>DE DESCUENTO</strong></span>
+                            </h2>
+                            <h4 class="caption subtitle">TODO LO QUE NECESESITES LAS 24 HORAS DEL DIA.</h4>
+                        </center>
+                    </div>
+                </li>
+                <li><img src='{% static "img/h4-slide12.png" %}' alt="Slide">
+                    <div class="caption-group">
+                        <h2 class="caption title">
+                            ENVIOS <span class="primary"> <strong>RAPIDOS</strong></span>
+                        </h2>
+                        <h2 class="caption title">
+                            <span class="primary"> <strong>TODO LA COMIDA QUE PUEDAS</strong></span>
+                        </h2>
+                    </div>
+                </li>
+                <li><img src='{% static "img/h4-slide15.png" %}' alt="Slide">
+                    <div class="caption-group">
+
+                        <h2 class="caption title">
+                            PERO PIDELO <span class="primary"> <strong> Y PIDELO</strong></span>
+                        </h2>
+                        <h2 class="caption title">
+                            <span class="primary"> <strong>PERO YA!</strong></span>
+                        </h2>
+                        <h4 class="caption subtitle">PORQUE SI NO LO PIDES, TE QUEDARÁS CON GANAS.</h4>
+
+                    </div>
+                </li>
+
+
+            </ul>
+        </div>
+        <!-- ./Slider -->
+    </div> <!-- End slider area -->
+
+    <div class="promo-area">
+        <div class="zigzag-bottom"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-6">
+                    <div class="single-promo promo1">
+                        <i class="fa fa-refresh"></i>
+                        <p>Productos de Calidad</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="single-promo promo2">
+                        <i class="fa fa-truck"></i>
+                        <p>Envios Rapidos</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="single-promo promo3">
+                        <i class="fa fa-lock"></i>
+                        <p>Pagos Seguros</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="single-promo promo4">
+                        <i class="fa fa-gift"></i>
+                        <p>Nuevos Productos</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- End promo area -->
+
+
+    <div class="single-prssaoduct-area">
+        <div class="container">
+            <div class="row">
+                <div class="latest-product">
+                    <br><br><br><br><br>
+                    <h2 class="section-title">PRODUCTOS</h2>
+                </div>
+
+                {% for producto in productos %}
+                <div class="col-md-3 col-sm-6">
+                    <div class="single-shop-product">
+                        <center>
+                            <div class="product-upper">
+                                <a class="btn add_to_cart_button  btn-block" href=" {% url 'pagPrincipal' %}  ">
+                                    <strong>
+                                        {{producto.nombre | upper}}
+                                    </strong>
+                                </a>
+                            </div>
+                            <div class="single-product">
+                                <div class="product-f-image">
+                                    {% if producto.imagen.url != null %}
+                                    <img src="{{producto.imagen.url}}" width="260px" height="300px" alt="">
+                                    {% else %}
+                                    <img src='{% static  "img/img_no_disponible.png" %}' width="260px" height="300px"
+                                        alt="">
+                                    {% endif %}
+                                    <div class="product-hover">
+                                        {% if user.username %}
+                                        <a href="{% url 'Add' producto.id %}" class="add-to-cart-link"><i
+                                                class="fa fa-shopping-cart"></i>Añadir al carrito</a>
+                                        {% else %}
+                                        <a href="{% url 'login' %}" class="add-to-cart-link"><i
+                                                class="fa fa-shopping-cart"></i>Añadir al carrito</a>
+                                        {% endif %}
+
+                                        <a href=" {% url 'detalle' producto.id%}" class="view-details-link"><i
+                                                class="fa fa-link"></i> Ver detalles</a>
+                                    </div>
+                                </div>
+                                <div class="product-carousel-price">
+                                    <ins> <strong>$ {{producto.precio}}</strong></ins>
+                                </div>
+                                <div class="product-option-shop">
+                                    <h5>{{producto.descripcion}}</h5>
+                                </div>
+
+                            </div>
+                        </center>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div><!-- End Productos area -->
+
+    <div class="maincontent-area">
+        <div class="zigzag-bottom"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="latest-product">
+                        <h2 class="section-title">Ultimos Productos</h2>
+                        <div class="product-carousel">
+                            {% for producto in productos %}
+                            <center>
+                                <div class="single-product">
+                                    <div class="product-f-image">
+                                        {% if producto.imagen.url != null %}
+                                        <a href=" {% url 'pagPrincipal' %} "><img src="{{producto.imagen.url}}"
+                                                width="260px" height="300px" alt=""></a>
+                                        {% else %}
+                                        <img src='{% static  "img/img_no_disponible.png" %}' width="260px"
+                                            height="300px" alt="">
+                                        {% endif %}
+                                    </div>
+                                    <div class="product-upper">
+                                        <a class="btn add_to_cart_button  btn-block" href=" {% url 'pagPrincipal' %}  ">
+                                            <strong>
+                                                {{producto.nombre | upper}}
+                                            </strong>
+                                        </a>
+                                    </div>
+
+                                    <div class="product-carousel-price">
+                                        <ins> $ {{producto.precio}}</ins>
+                                    </div>
+                                </div>
+                            </center>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- End main content area -->
+
+
+    <!-- Start Final area -->
+    <div class="footer-top-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-6">
+                    <div class="footer-about-us">
+                        <h2>PERO <span>YA!</span></h2>
+                        <p> Es una empresa de envio de distintos productos y cuenta con
+                            una flexibilidad al momento de pedir.</p>
+                        <div class="footer-social">
+                            <a href=" {% url 'pagPrincipal' %}" target="_blank"><i class="fa fa-facebook"></i></a>
+                            <a href=" {% url 'pagPrincipal' %}" target="_blank"><i class="fa fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="footer-menu">
+                        <h2 class="footer-wid-title">Secciones</h2>
+                        <ul>
+                            <li><a href=" {% url 'pagPrincipal' %} ">Mi cuenta</a></li>
+                            <li><a href=" {% url 'contactos' %} ">Contactos</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="footer-menu">
+                        <h2 class="footer-wid-title">Categorías</h2>
+                        <ul>
+                            <li><a href=" {% url 'pagServicios' %} ">Comida</a></li>
+                            <li><a href=" {% url 'pagServicios' %} ">Bebidas</a></li>
+                            <li><a href=" {% url 'pagServicios' %} ">Supermercado</a></li>
+                            <li><a href=" {% url 'pagServicios' %} ">Postres</a></li>
+                            <li><a href=" {% url 'pagServicios' %} ">Salud</a></li>
+                            <li><a href=" {% url 'pagServicios' %} ">Hogar</a></li>
+                            <li><a href=" {% url 'pagServicios' %} ">Encargos</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="footer-newsletter">
+                        <h2 class="footer-wid-title">Suscribase</h2>
+                        <p>¡Suscríbase para recibir actualizaciones, noticias y promociones que ofrecemos en cada
+                            semana!</p>
+                        <div class="newsletter-form">
+                            <form action="#">
+                                <input type="email" placeholder="Escribe tu E-mail">
+                                <input type="submit" value="Suscribir">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- End footer top area -->
+
+    <div class="footer-bottom-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="copyright">
+                        <p>Pais: {{ data.country }}</p>
+                        <p>Ciudad: {{ data.city }}</p>
+                        <!-- <p>Latitud: {{ data.lat }}</p>
+                        <p>Longitud: {{ data.lon }}</p>-->
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="copyright">
+                        <p>Codigo Pais: {{ data.countryCode }}</p>
+                        <p>Zona Horaria: {{ data.timezone }}</p>
+                        <p>Organización: {{ data.isp }}</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div> <!-- End footer bottom area -->
+
+
+    <!-- Latest jQuery form server -->
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+
+    <!-- Bootstrap JS form CDN -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+    <!-- jQuery sticky menu -->
+    <script src='{% static "js/owl.carousel.min.js" %}'></script>
+    <script src='{% static "js/jquery.sticky.js" %}'></script>
+
+    <!-- jQuery easing -->
+    <script src='{% static "js/jquery.easing.1.3.min.js" %}'></script>
+
+    <!-- Main Script -->
+    <script src='{% static "js/main.js" %}'></script>
+
+    <!-- Slider -->
+    <script type="text/javascript" src='{% static "js/bxslider.min.js" %}'></script>
+    <script type="text/javascript" src='{% static "js/script.slider.js" %}'></script>
+
+</body>
+
+</html>
